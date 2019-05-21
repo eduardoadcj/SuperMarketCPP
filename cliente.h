@@ -5,7 +5,12 @@ struct Cliente
 {
   int id;
   char[100] nome;
-  double total_comprado;
+  int status;
 };
+
+void salvar_cliente();
+void visualizar_cliente();
+void alterar_cliente();
+void excluir_cliente();
 
 #endif
