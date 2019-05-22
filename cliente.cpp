@@ -22,3 +22,14 @@ void print_menu_cliente(char *op)
     cin >> *op;
   }
 }
+
+void add_cliente(){
+
+  Cliente cliente;
+
+
+  
+  fseek(FILE_CLIENTE, 0, SEEK_END);
+  fwrite(&cliente, sizeof(Cliente), 1, FILE_CLIENTE);
+
+}

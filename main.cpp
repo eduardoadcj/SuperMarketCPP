@@ -61,8 +61,10 @@ int main()
   if ( load_files() ) {
     // show_menu();
     cout << "Arquivo criado!" << endl;
+    close_files();
   }else{
     cout << "Banco de dados indisponível!" << endl;
+    return 1;
   }
 
   return 0;
