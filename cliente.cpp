@@ -1,9 +1,11 @@
 #include <iostream>
 #include "cliente.h"
+#include "keymanager.h"
 
 using namespace std;
 
 extern FILE* FILE_CLIENTE;
+extern char CLIENTE_KEY_NAME[];
 
 void print_menu_cliente(char *op)
 {
@@ -25,11 +27,15 @@ void print_menu_cliente(char *op)
 
 void add_cliente(){
 
-  Cliente cliente;
+  int k = generate_key(CLIENTE_KEY_NAME);
 
+  cout << "Chave gerada: " << k;
 
-  
-  fseek(FILE_CLIENTE, 0, SEEK_END);
-  fwrite(&cliente, sizeof(Cliente), 1, FILE_CLIENTE);
+  // Cliente cliente;
+  //
+  //
+  //
+  // fseek(FILE_CLIENTE, 0, SEEK_END);
+  // fwrite(&cliente, sizeof(Cliente), 1, FILE_CLIENTE);
 
 }

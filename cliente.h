@@ -9,5 +9,6 @@ struct Cliente
 };
 
 void print_menu_cliente(char *op);
+void add_cliente();
 
 #endif

@@ -34,7 +34,7 @@ void show_menu(){
       print_menu_cliente(&op);
 
       if(op == '1'){ // Adicionar cliente
-
+        add_cliente();
       }else if (op == '2'){ // Alterar cliente
 
       }else if (op == '3'){ // Remover cliente
@@ -59,8 +59,7 @@ int main()
   cout << "------------------- Super Market CPP ------------------- " << endl;
 
   if ( load_files() ) {
-    // show_menu();
-    cout << "Arquivo criado!" << endl;
+    show_menu();
     close_files();
   }else{
     cout << "Banco de dados indisponível!" << endl;
