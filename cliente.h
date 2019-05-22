@@ -4,13 +4,10 @@
 struct Cliente
 {
   int id;
-  char[100] nome;
+  char nome[100];
   int status;
 };
 
-void salvar_cliente();
-void visualizar_cliente();
-void alterar_cliente();
-void excluir_cliente();
+void print_menu_cliente(char *op);
 
 #endif
