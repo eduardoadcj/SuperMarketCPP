@@ -4,6 +4,7 @@
 #include "filemanager.h"
 
 char CLIENTE_KEY_NAME[] = "CLIENTE";
+char PRODUTO_KEY_NAME[] = "PRODUTO";
 
 extern FILE* FILE_KEY_MANAGER;
 

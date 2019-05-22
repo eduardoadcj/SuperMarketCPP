@@ -6,6 +6,7 @@ using namespace std;
 
 extern FILE* FILE_CLIENTE;
 extern char CLIENTE_KEY_NAME[];
+extern char PRODUTO_KEY_NAME[];
 
 void print_menu_cliente(char *op)
 {
