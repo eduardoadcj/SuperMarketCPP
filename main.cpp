@@ -40,7 +40,7 @@ void show_menu(){
       }else if (op == '3'){ // Remover cliente
 
       }else if (op == '4'){ // Visualizar cliente
-
+        list_cliente();
       }
 
     }else if(op == '3'){ // Opcao do acervo

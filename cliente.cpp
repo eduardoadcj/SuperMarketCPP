@@ -42,9 +42,31 @@ void add_cliente(){
 
     fseek(FILE_CLIENTE, 0, SEEK_END);
     fwrite(&cli, sizeof(Cliente), 1, FILE_CLIENTE);
+    fflush(FILE_CLIENTE);
 
   }else{
     cout << "Erro ao inserir o cliente!" << endl;
   }
+
+}
+
+void list_cliente()
+{
+
+  Cliente *c;
+
+  fseek(FILE_CLIENTE, 0, SEEK_SET);
+
+  cout << "------------------- Clientes Registrados -------------------" << endl;
+
+  while(!feof(FILE_CLIENTE)){
+
+    fread(c, sizeof(Cliente), 1, FILE_CLIENTE);
+
+    if(c != NULL)
+      cout << c->id << " - " << c->nome << endl;
+
+  }
+
 
 }
