@@ -31,7 +31,7 @@ int generate_key(char name[])
 {
 
   KeyType *kts = new KeyType;
-  int n, p = 0, found = 0, key = 0;
+  int found = 0, key = 0;
 
   fseek(FILE_KEY_MANAGER, 0, SEEK_SET);
 
@@ -41,7 +41,6 @@ int generate_key(char name[])
 
     if(kts->name == NULL)
       break;
-
 
     if(is_equal(kts->name, name)){
       found = 1;
