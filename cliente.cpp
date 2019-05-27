@@ -28,15 +28,23 @@ void print_menu_cliente(char *op)
 
 void add_cliente(){
 
-  int k = generate_key(CLIENTE_KEY_NAME);
+  Cliente cli;
 
-  cout << "Chave gerada: " << k;
+  cout << "Cadastro de Cliente" << endl;
 
-  // Cliente cliente;
-  //
-  //
-  //
-  // fseek(FILE_CLIENTE, 0, SEEK_END);
-  // fwrite(&cliente, sizeof(Cliente), 1, FILE_CLIENTE);
+  cout << "Nome: ";
+  cin >> cli.nome;
+
+  cli.id = generate_key(CLIENTE_KEY_NAME);
+  cli.status = 1;
+
+  if(cli.id != 0){
+
+    fseek(FILE_CLIENTE, 0, SEEK_END);
+    fwrite(&cli, sizeof(Cliente), 1, FILE_CLIENTE);
+
+  }else{
+    cout << "Erro ao inserir o cliente!" << endl;
+  }
 
 }
