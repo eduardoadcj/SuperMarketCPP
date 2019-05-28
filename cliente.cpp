@@ -42,7 +42,6 @@ void add_cliente(){
 
     fseek(FILE_CLIENTE, 0, SEEK_END);
     fwrite(&cli, sizeof(Cliente), 1, FILE_CLIENTE);
-    fflush(FILE_CLIENTE);
 
   }else{
     cout << "Erro ao inserir o cliente!" << endl;
@@ -53,20 +52,62 @@ void add_cliente(){
 void list_cliente()
 {
 
-  Cliente *c;
+  Cliente c;
 
   fseek(FILE_CLIENTE, 0, SEEK_SET);
 
   cout << "------------------- Clientes Registrados -------------------" << endl;
 
-  while(!feof(FILE_CLIENTE)){
+  while(fread(&c, sizeof(Cliente), 1, FILE_CLIENTE) != 0)
+      cout << c.id << " - " << c.nome << endl;
 
-    fread(c, sizeof(Cliente), 1, FILE_CLIENTE);
+}
 
-    if(c != NULL)
-      cout << c->id << " - " << c->nome << endl;
+Cliente* find_cliente(int id)
+{
 
+  int found = 0;
+  Cliente *c = new Cliente;
+
+  fseek(FILE_CLIENTE, 0, SEEK_SET);
+
+  while(fread(c, sizeof(Cliente), 1, FILE_CLIENTE) != 0){
+    if(c->id == id){
+      found = 1;
+      break;
+    }
   }
 
+  if(!found)
+    return NULL;
+
+  return c;
+
+}
+
+void update_cliente()
+{
+
+  Cliente *cliente;
+  int id;
+
+  cout << "Informe o código do cliente: ";
+  cin >> id;
+
+  cliente = find_cliente(id);
+
+  if(cliente != NULL){
+    cout << cliente->id << " - " << cliente->nome << endl;
+
+    cout << "Novo nome: ";
+    cin >> cliente->nome;
+
+    fseek(FILE_CLIENTE, sizeof(Cliente) * -1, SEEK_CUR);
+
+    fwrite(cliente, sizeof(Cliente), 1, FILE_CLIENTE);
+
+  }else{
+    cout << "Cliente não encontrado!" << endl;
+  }
 
 }

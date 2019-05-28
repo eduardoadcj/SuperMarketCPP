@@ -36,7 +36,7 @@ void show_menu(){
       if(op == '1'){ // Adicionar cliente
         add_cliente();
       }else if (op == '2'){ // Alterar cliente
-
+        update_cliente();
       }else if (op == '3'){ // Remover cliente
 
       }else if (op == '4'){ // Visualizar cliente
