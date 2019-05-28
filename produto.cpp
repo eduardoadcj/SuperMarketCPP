@@ -56,16 +56,15 @@ void add_produto(){
 void list_produto()
 {
 
-  Produto *p;
+  Produto p;
 
   fseek(FILE_PRODUTO, 0, SEEK_SET);
 
   cout << "------------------- Produtos Registrados -------------------" << endl;
 
-  while(fread(p, sizeof(Produto), 1, FILE_PRODUTO) !=0){
+  while(fread(&p, sizeof(Produto), 1, FILE_PRODUTO) !=0){
 
-    if(p != NULL)
-      cout << p->id << " - " << p->nome << endl;
+      cout << p.id << " - " << p.nome << endl;
 
   }
 
@@ -73,5 +72,5 @@ void list_produto()
 
 Produto* find_produto(int id)
 {
-  
+
 }
