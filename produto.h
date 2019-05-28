@@ -4,7 +4,6 @@
 struct Produto{
 
   int id;
-  char descricao [300];
   char nome [100];
   double preco;
 
