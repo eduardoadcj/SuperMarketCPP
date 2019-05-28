@@ -62,13 +62,16 @@ void list_produto()
 
   cout << "------------------- Produtos Registrados -------------------" << endl;
 
-  while(!feof(FILE_PRODUTO)){
+  while(fread(p, sizeof(Produto), 1, FILE_PRODUTO) !=0){
 
-    fread(c, sizeof(Produto), 1, FILE_PRODUTO);
-
-    if(c != NULL)
-      cout << c->id << " - " << c->nome << endl;
+    if(p != NULL)
+      cout << p->id << " - " << p->nome << endl;
 
   }
 
+}
+
+Produto* find_produto(int id)
+{
+  
 }
