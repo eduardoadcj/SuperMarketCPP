@@ -35,9 +35,7 @@ int generate_key(char name[])
 
   fseek(FILE_KEY_MANAGER, 0, SEEK_SET);
 
-  while(!feof(FILE_KEY_MANAGER)){
-
-    fread(kts, sizeof(KeyType), 1, FILE_KEY_MANAGER);
+  while(fread(kts, sizeof(KeyType), 1, FILE_KEY_MANAGER) != 0){
 
     if(kts->name == NULL)
       break;
