@@ -67,6 +67,7 @@ void list_produto()
 
   while(fread(&p, sizeof(Produto), 1, FILE_PRODUTO) !=0){
 
+    if(status)
       cout << p.id << " - " << p.nome << " - " << p.preco << endl;
 
   }
