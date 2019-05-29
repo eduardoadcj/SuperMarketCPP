@@ -37,6 +37,9 @@ void add_produto(){
 
   cout << "Nome: ";
   cin >> prod.nome;
+  cout << "" << endl;
+  cout << "Preço: ";
+  cin >> prod.preco;
 
   prod.id = generate_key(PRODUTO_KEY_NAME);
   prod.status = 1;
@@ -64,7 +67,7 @@ void list_produto()
 
   while(fread(&p, sizeof(Produto), 1, FILE_PRODUTO) !=0){
 
-      cout << p.id << " - " << p.nome << endl;
+      cout << p.id << " - " << p.nome << " - " << p.preco << endl;
 
   }
 
