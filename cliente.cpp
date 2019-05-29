@@ -58,8 +58,10 @@ void list_cliente()
 
   cout << "------------------- Clientes Registrados -------------------" << endl;
 
-  while(fread(&c, sizeof(Cliente), 1, FILE_CLIENTE) != 0)
+  while(fread(&c, sizeof(Cliente), 1, FILE_CLIENTE) != 0){
+    if(c.status)
       cout << c.id << " - " << c.nome << endl;
+  }
 
 }
 
@@ -105,6 +107,32 @@ void update_cliente()
     fseek(FILE_CLIENTE, sizeof(Cliente) * -1, SEEK_CUR);
 
     fwrite(cliente, sizeof(Cliente), 1, FILE_CLIENTE);
+
+  }else{
+    cout << "Cliente não encontrado!" << endl;
+  }
+
+}
+
+void remove_cliente()
+{
+
+  Cliente *cliente;
+  int id;
+
+  cout << "Informe o código do cliente: ";
+  cin >> id;
+
+  cliente = find_cliente(id);
+
+  if(cliente != NULL){
+
+    cliente->status = 0;
+
+    fseek(FILE_CLIENTE, sizeof(Cliente) * -1, SEEK_CUR);
+    fwrite(cliente, sizeof(Cliente), 1, FILE_CLIENTE);
+
+    cout << "Cliente removido!" << endl;
 
   }else{
     cout << "Cliente não encontrado!" << endl;

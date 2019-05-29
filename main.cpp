@@ -38,7 +38,7 @@ void show_menu(){
       }else if (op == '2'){ // Alterar cliente
         update_cliente();
       }else if (op == '3'){ // Remover cliente
-
+        remove_cliente();
       }else if (op == '4'){ // Visualizar cliente
         list_cliente();
       }
