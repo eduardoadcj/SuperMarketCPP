@@ -29,7 +29,8 @@ void print_menu_produto(char *op)
 
 }
 
-void add_produto(){
+void add_produto()
+{
 
   Produto prod;
 
@@ -47,7 +48,7 @@ void add_produto(){
   if(prod.id != 0){
 
     fseek(FILE_PRODUTO, 0, SEEK_END);
-    fwrite(&cli, sizeof(Produto), 1, FILE_PRODUTO);
+    fwrite(&prod, sizeof(Produto), 1, FILE_PRODUTO);
     fflush(FILE_PRODUTO);
 
   }else{
@@ -67,7 +68,7 @@ void list_produto()
 
   while(fread(&p, sizeof(Produto), 1, FILE_PRODUTO) !=0){
 
-    if(status)
+    if(p.status)
       cout << p.id << " - " << p.nome << " - " << p.preco << endl;
 
   }
@@ -78,11 +79,11 @@ Produto* find_produto(int id)
 {
 
   int found = 0;
-  Poduto *p = new Produto;
+  Produto *p = new Produto;
 
   fseek(FILE_PRODUTO, 0, SEEK_SET);
 
-  while(fread(c, sizeof(Produto), 1, FILE_PRODUTO) != 0){
+  while(fread(p, sizeof(Produto), 1, FILE_PRODUTO) != 0){
     if(p->id == id){
       found = 1;
       break;

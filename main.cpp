@@ -1,6 +1,7 @@
 #include <iostream>
 #include "filemanager.h"
 #include "cliente.h"
+#include "produto.h"
 
 using namespace std;
 
@@ -43,7 +44,20 @@ void show_menu(){
         list_cliente();
       }
 
-    }else if(op == '3'){ // Opcao do acervo
+    }else if(op == '3'){ // Opcao do produto
+
+      op = 'e';
+      print_menu_produto(&op);
+
+      if(op == '1'){ // Adicionar produto
+        add_produto();
+      }else if (op == '2'){ // Alterar produto
+
+      }else if (op == '3'){ // Remover produto
+        remove_produto();
+      }else if (op == '4'){ // Visualizar produto
+        list_produto();
+      }
 
     }else if(op == '0'){ // encerrar programa
       cont = 0;

@@ -10,4 +10,9 @@ struct Produto{
 
 };
 
+void print_menu_produto(char *op);
+void add_produto();
+void list_produto();
+void remove_produto();
+
 #endif
