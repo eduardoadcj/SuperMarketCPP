@@ -73,4 +73,47 @@ void list_produto()
 Produto* find_produto(int id)
 {
 
+  int found = 0;
+  Poduto *p = new Produto;
+
+  fseek(FILE_PRODUTO, 0, SEEK_SET);
+
+  while(fread(c, sizeof(Produto), 1, FILE_PRODUTO) != 0){
+    if(p->id == id){
+      found = 1;
+      break;
+    }
+  }
+
+  if(!found)
+    return NULL;
+
+  return p;
+
+}
+
+void remove_produto()
+{
+
+  Produto *produto;
+  int id;
+
+  cout << "Informe o código do produto: ";
+  cin >> id;
+
+  produto = find_produto(id);
+
+  if(produto != NULL){
+
+    produto->status = 0;
+
+    fseek(FILE_PRODUTO, sizeof(Produto) * -1, SEEK_CUR);
+    fwrite(produto, sizeof(Produto), 1, FILE_PRODUTO);
+
+    cout << "Produto removido!" << endl;
+
+  }else{
+    cout << "Produto não encontrado!" << endl;
+  }
+
 }
