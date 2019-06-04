@@ -98,6 +98,73 @@ Produto* find_produto(int id)
 
 }
 
+void update_produto()
+{
+
+  Produto *produto;
+  int id = 0;
+  char op = 'e';
+
+  cout << "Informe o código do produto: ";
+  cin >> id;
+
+  produto = find_produto(id);
+
+  if(produto == NULL){
+    cout << "Produto não encontrado!" << endl;
+  }else{
+
+    cout << produto->id << " - "
+      << produto->nome << " - "
+      << produto->preco << "R$ - "
+      << produto->quantidade << " - "
+      << (produto->status ? "Ativo" : "Inativo")
+      << endl;
+
+    while(op != '0'){
+      cout << " -> Menu de alterações" << endl;
+      cout << "Selecione uma das opções abaixo:" << endl;
+      cout << "1 - Alterar nome" << endl;
+      cout << "2 - Alterar preço" << endl;
+      cout << "3 - Alterar quantidade" << endl;
+      cout << "0 - Finalizar alteração" << endl;
+      cin >> op;
+
+      if(op == '1'){
+
+        cout << "Novo nome: ";
+        cin >> produto->nome;
+
+      }else if(op == '2'){
+
+        cout << "Novo preço: ";
+        cin >> produto->preco;
+
+      }else if(op == '3'){
+
+        cout << "Nova quantidade: ";
+        cin >> produto->quantidade;
+
+      }else if(op == '0'){
+
+        fseek(FILE_PRODUTO, sizeof(Produto) * -1, SEEK_CUR);
+        fwrite(produto, sizeof(Produto), 1, FILE_PRODUTO);
+
+        cout << "Alteração concluída!" << endl;
+        cout << produto->id << " - "
+          << produto->nome << " - "
+          << produto->preco << "R$ - "
+          << produto->quantidade << " - "
+          << (produto->status ? "Ativo" : "Inativo")
+          << endl;
+      }
+
+    }
+
+  }
+
+}
+
 void remove_produto()
 {
 

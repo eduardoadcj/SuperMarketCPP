@@ -52,7 +52,7 @@ void show_menu(){
       if(op == '1'){ // Adicionar produto
         add_produto();
       }else if (op == '2'){ // Alterar produto
-
+        update_produto();
       }else if (op == '3'){ // Remover produto
         remove_produto();
       }else if (op == '4'){ // Visualizar produto
