@@ -80,6 +80,8 @@ int main()
     return 1;
   }
 
+  //https://stackoverflow.com/questions/873454/how-to-truncate-a-file-in-c
+
   return 0;
 
 }
