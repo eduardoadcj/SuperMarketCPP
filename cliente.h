@@ -13,5 +13,6 @@ void add_cliente();
 void list_cliente();
 void update_cliente();
 void remove_cliente();
+Cliente* find_cliente(int id);
 
 #endif
