@@ -2,6 +2,7 @@
 #include "filemanager.h"
 #include "cliente.h"
 #include "produto.h"
+#include "venda.h"
 
 using namespace std;
 
@@ -28,6 +29,15 @@ void show_menu(){
     }
 
     if(op == '1'){ // opcao venda
+
+      op = 'e';
+      print_menu_venda(&op);
+
+      if(op == '1'){ // opcao efetuar venda
+        make_sale();
+      }else if(op == '2'){ // opcao listar vendas
+
+      }
 
     }else if(op == '2'){ // opcao dos clientes
 

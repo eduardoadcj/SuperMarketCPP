@@ -17,4 +17,7 @@ struct ItensVenda
   double total;
 };
 
+void print_menu_venda(char *op);
+void make_sale();
+
 #endif

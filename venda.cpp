@@ -10,8 +10,24 @@ using namespace std;
 extern FILE* FILE_VENDA;
 extern FILE* FILE_ITENS_VENDA;
 extern FILE* FILE_PRODUTO;
-extern char VENDA_KEY_NAME;
-extern char ITENS_VENDA_KEY_NAME;
+extern char VENDA_KEY_NAME[];
+extern char ITENS_VENDA_KEY_NAME[];
+
+void print_menu_venda(char *op)
+{
+  while(*op != '0' &&
+    *op != '1' &&
+    *op != '2' &&
+    *op != '3' &&
+    *op != '4'){
+    cout << "" << endl;
+    cout << " -> Menu venda" << endl;
+    cout << "0 - Voltar" << endl;
+    cout << "1 - Efetuar venda" << endl;
+    cout << "2 - Listar vendas" << endl;
+    cin >> *op;
+  }
+}
 
 void make_sale()
 {
@@ -26,7 +42,7 @@ void make_sale()
   list<ItensVenda> itens_venda;
   list<ItensVenda>::iterator it_itens_venda;
 
-  cout << "Informe o id do cliente: "
+  cout << "Informe o id do cliente: ";
   cin >> id_cliente;
 
   cliente = find_cliente(id_cliente); //trocar esse metodo por um que busque os com status diferente de 0
@@ -49,7 +65,7 @@ void make_sale()
         cout << produto->id << " - "
           << produto->nome << " - "
           << produto->preco << "R$ - "
-          << produto->quantidade << " - "
+          << produto->quantidade
           << endl;
 
         iv.id_produto = produto->id;
@@ -62,7 +78,9 @@ void make_sale()
           if(iv.quantidade > produto->quantidade)
             cout << "Quantidade indisponível!" << endl;
 
-        }while(iv.quantidade <= produto->quantidade);
+        }while(iv.quantidade > produto->quantidade);
+
+        iv.total = iv.quantidade * produto->preco;
 
         itens_venda.push_back(iv);
 
@@ -96,11 +114,14 @@ void make_sale()
     for(it_itens_venda = itens_venda.begin();
       it_itens_venda != itens_venda.end();
       it_itens_venda++)
-      venda.total += it->total
+      venda.total += it_itens_venda->total;
+
+
+    cout << "Total da venda: " << venda.total << "R$" << endl;
 
     venda.id = generate_key(VENDA_KEY_NAME);
 
-    fseek(FILE_VENDA, sizeof(Venda), 1, SEEK_END);
+    fseek(FILE_VENDA, 0, SEEK_END);
     fwrite(&venda, sizeof(Venda), 1, FILE_VENDA);
 
     for(it_itens_venda = itens_venda.begin();
@@ -108,11 +129,12 @@ void make_sale()
       it_itens_venda++){
 
       produto = find_produto(it_itens_venda->id_produto);
-      fseek(FILE_PRODUTO, sizeof(Produto) * -1, 1, SEEK_CUR);
+      produto->quantidade -= it_itens_venda->quantidade;
+      fseek(FILE_PRODUTO, sizeof(Produto) * -1, SEEK_CUR);
       fwrite(produto, sizeof(Produto), 1, FILE_PRODUTO);
 
-      fseek(FILE_ITENS_VENDA, sizeof(ItensVenda), 1, SEEK_END);
-      fwrite(it_itens_venda, sizeof(ItensVenda), 1, FILE_ITENS_VENDA);
+      fseek(FILE_ITENS_VENDA, 0, SEEK_END);
+      fwrite(&it_itens_venda, sizeof(ItensVenda), 1, FILE_ITENS_VENDA);
 
     }
 
