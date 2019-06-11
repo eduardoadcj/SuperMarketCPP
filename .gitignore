@@ -2,6 +2,9 @@
 # Edit at https://www.gitignore.io/?templates=c++,linux
 
 ### C++ ###
+
+/ex
+
 # Prerequisites
 *.d
 
