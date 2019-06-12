@@ -36,7 +36,7 @@ void show_menu(){
       if(op == '1'){ // opcao efetuar venda
         make_sale();
       }else if(op == '2'){ // opcao listar vendas
-
+        list_venda();
       }
 
     }else if(op == '2'){ // opcao dos clientes

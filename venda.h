@@ -19,5 +19,6 @@ struct ItensVenda
 
 void print_menu_venda(char *op);
 void make_sale();
+void list_venda();
 
 #endif

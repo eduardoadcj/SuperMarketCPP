@@ -133,13 +133,62 @@ void make_sale()
       fseek(FILE_PRODUTO, sizeof(Produto) * -1, SEEK_CUR);
       fwrite(produto, sizeof(Produto), 1, FILE_PRODUTO);
 
+      iv = *it_itens_venda;
+      iv.id = generate_key(ITENS_VENDA_KEY_NAME);
+      iv.id_venda = venda.id;
+
       fseek(FILE_ITENS_VENDA, 0, SEEK_END);
-      fwrite(&it_itens_venda, sizeof(ItensVenda), 1, FILE_ITENS_VENDA);
+      fwrite(&iv, sizeof(ItensVenda), 1, FILE_ITENS_VENDA);
 
     }
 
   }else{
     cout << "Cliente não encontrado!" << endl;
+  }
+
+}
+
+void list_venda()
+{
+
+  Cliente *cliente = new Cliente;
+  Produto *produto = new Produto;
+  ItensVenda *itens_venda = new ItensVenda;
+  Venda *venda = new Venda;
+
+  cout << "--------------------- Relatório de Vendas ---------------------" << endl;
+
+  fseek(FILE_VENDA, 0, SEEK_SET);
+  while(fread(venda, sizeof(Venda), 1, FILE_VENDA)){
+    if(venda != NULL){
+
+      cout << venda->id << " -----------------------" << endl;
+
+      cliente = find_cliente(venda->id_cliente);
+      if(cliente != NULL)
+        cout << "Cliente: " << cliente->nome << endl;
+
+      //Buscando itens da venda
+      fseek(FILE_ITENS_VENDA, 0, SEEK_SET);
+
+      cout << "     Itens ------------" << endl;
+
+      while(fread(itens_venda, sizeof(ItensVenda), 1, FILE_ITENS_VENDA)){
+        if(itens_venda != NULL && itens_venda->id_venda == venda->id){
+          produto = find_produto(itens_venda->id_produto);
+          if(produto != NULL)
+            cout << "      " << produto->id << " - "
+            << produto->nome << " - "
+            << produto->preco << " - "
+            << itens_venda->quantidade << " - "
+            << itens_venda->total
+            << endl;
+        }
+      }
+
+      cout << "Total: " << venda->total << endl;
+
+    }
   }
 
 }
