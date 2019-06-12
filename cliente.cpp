@@ -79,8 +79,10 @@ Cliente* find_cliente(int id)
     }
   }
 
-  if(!found)
+  if(!found){
+    delete c;
     return NULL;
+  }
 
   return c;
 

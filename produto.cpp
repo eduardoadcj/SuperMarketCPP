@@ -91,8 +91,10 @@ Produto* find_produto(int id)
     }
   }
 
-  if(!found)
+  if(!found){
+    delete p;
     return NULL;
+  }
 
   return p;
 

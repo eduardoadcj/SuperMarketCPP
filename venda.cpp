@@ -153,8 +153,8 @@ void make_sale()
 void list_venda()
 {
 
-  Cliente *cliente = new Cliente;
-  Produto *produto = new Produto;
+  Cliente *cliente;
+  Produto *produto;
   ItensVenda *itens_venda = new ItensVenda;
   Venda *venda = new Venda;
 
@@ -193,6 +193,9 @@ void list_venda()
     }
   }
 
+  delete venda;
+  delete itens_venda;
+
 }
 
 void list_total_cliente()
@@ -221,5 +224,8 @@ void list_total_cliente()
 
     }
   }
+
+  delete cliente;
+  delete venda;
 
 }
