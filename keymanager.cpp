@@ -27,7 +27,7 @@ int is_equal(char a[], char b[])
 
   return 1;
 
-}
+}//strcmp
 
 int generate_key(char name[])
 {
@@ -39,9 +39,6 @@ int generate_key(char name[])
 
   while(fread(kts, sizeof(KeyType), 1, FILE_KEY_MANAGER) != 0){
 
-    if(kts->name == NULL)
-      break;
-
     if(is_equal(kts->name, name)){
       found = 1;
       break;
@@ -51,12 +48,11 @@ int generate_key(char name[])
 
   if(found == 0){
 
-    kts = new KeyType;
     kts->key = 1;
 
     for(int i = 0; i < strlen(name); i++){
       kts->name[i] = name[i];
-    }
+    }//strcpy
 
     fseek(FILE_KEY_MANAGER, 0, SEEK_END);
     fwrite(kts, sizeof(KeyType), 1, FILE_KEY_MANAGER);
