@@ -217,6 +217,8 @@ void list_total_cliente()
 
       cout << cliente->nome << " - " << total << endl;
 
+      total = 0;
+
     }
   }
 
