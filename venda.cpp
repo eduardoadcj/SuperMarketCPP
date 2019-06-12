@@ -10,6 +10,7 @@ using namespace std;
 extern FILE* FILE_VENDA;
 extern FILE* FILE_ITENS_VENDA;
 extern FILE* FILE_PRODUTO;
+extern FILE* FILE_CLIENTE;
 extern char VENDA_KEY_NAME[];
 extern char ITENS_VENDA_KEY_NAME[];
 
@@ -25,6 +26,7 @@ void print_menu_venda(char *op)
     cout << "0 - Voltar" << endl;
     cout << "1 - Efetuar venda" << endl;
     cout << "2 - Listar vendas" << endl;
+    cout << "3 - Listar total comprado por cliente" << endl;
     cin >> *op;
   }
 }
@@ -187,6 +189,33 @@ void list_venda()
       }
 
       cout << "Total: " << venda->total << endl;
+
+    }
+  }
+
+}
+
+void list_total_cliente()
+{
+
+  Cliente *cliente = new Cliente;
+  Venda *venda = new Venda;
+  double total = 0;
+
+  cout << "------------------ Total comprado por cliente ------------------" << endl;
+
+  fseek(FILE_CLIENTE, 0, SEEK_SET);
+  while(fread(cliente, sizeof(Cliente), 1, FILE_CLIENTE)){
+    if(cliente != NULL){
+
+      fseek(FILE_VENDA, 0, SEEK_SET);
+      while(fread(venda, sizeof(Venda), 1, FILE_VENDA)){
+        if(venda != NULL && venda->id_cliente == cliente->id){
+          total += venda->total;
+        }
+      }
+
+      cout << cliente->nome << " - " << total << endl;
 
     }
   }

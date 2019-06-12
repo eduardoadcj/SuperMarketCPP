@@ -37,6 +37,8 @@ void show_menu(){
         make_sale();
       }else if(op == '2'){ // opcao listar vendas
         list_venda();
+      }else if(op == '3'){
+        list_total_cliente();
       }
 
     }else if(op == '2'){ // opcao dos clientes
