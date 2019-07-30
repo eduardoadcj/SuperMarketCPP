@@ -10,25 +10,6 @@ char ITENS_VENDA_KEY_NAME[] = "ITENS_VENDA";
 
 extern FILE* FILE_KEY_MANAGER;
 
-int is_equal(char a[], char b[])
-{
-
-  int len = strlen(a);
-
-  if(len <= 0)
-    return 0;
-  if(len != strlen(b))
-    return 0;
-
-  for(int i = 0; i < len; i++){
-    if(a[i] != b[i])
-      return 0;
-  }
-
-  return 1;
-
-}//strcmp
-
 int generate_key(char name[])
 {
 
@@ -39,7 +20,7 @@ int generate_key(char name[])
 
   while(fread(kts, sizeof(KeyType), 1, FILE_KEY_MANAGER) != 0){
 
-    if(is_equal(kts->name, name)){
+    if(strcmp(kts->name, name) == 0){ // este método verifica se as strings são iguais
       found = 1;
       break;
     }
@@ -50,9 +31,7 @@ int generate_key(char name[])
 
     kts->key = 1;
 
-    for(int i = 0; i < strlen(name); i++){
-      kts->name[i] = name[i];
-    }//strcpy
+    strcpy(kts->name, name); // este metodo copia o conteudo de nom para kts->nome
 
     fseek(FILE_KEY_MANAGER, 0, SEEK_END);
     fwrite(kts, sizeof(KeyType), 1, FILE_KEY_MANAGER);
